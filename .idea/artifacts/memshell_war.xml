@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="memshell:war">
+    <output-path>$PROJECT_DIR$/memshell/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>memshell</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="memshell.war">
+      <element id="artifact" artifact-name="memshell:war exploded" />
+    </root>
+  </artifact>
+</component>

