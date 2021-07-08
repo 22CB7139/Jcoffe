@@ -21,7 +21,8 @@
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-annotations-api:8.5.43" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.4" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.30" />
           <element id="archive" name="utils-1.0-SNAPSHOT.jar">
             <element id="module-output" name="utils" />
           </element>

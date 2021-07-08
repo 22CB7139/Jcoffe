@@ -9,8 +9,20 @@ import java.io.*;
 public class Execute implements Serializable {
     private static final long serialVersionUID = 7439581476576889858L;
     public String command;
+    static String sequence = "静态变量初始化";
 
-    public Execute(){}
+    public Execute(){
+        sequence = "无参构造函数";
+        System.out.println(sequence);
+    }
+    {
+        sequence = "代码块执行";
+        System.out.println(sequence);
+    }
+    static{
+        sequence = "静态代码块执行";
+        System.out.println(sequence);
+    }
 
     public Execute(String command) {
         this.command = command;
@@ -23,29 +35,7 @@ public class Execute implements Serializable {
     public void setCommand(String command) throws IOException {
         this.command = command;
     }
-       /*
-    //defineclass自动执行----Server
-    static {
-        Process p;
-        String result="";
-        String disr;
-        try{
-            if (System.getProperty("os.name").toLowerCase().indexOf("windows") >= 0) {
-                p = Runtime.getRuntime().exec(new String[]{"cmd.exe", "/c", "whoami"});
-            } else {
-                p = Runtime.getRuntime().exec("whoami");
-            }
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream(),"GB2312"));
-            while((disr=bufferedReader.readLine())!=null){
-                result += disr + "";
-            }
-            System.out.println(result);
-        }catch(Exception e){
-            //todo nothing
-        }
 
-    }
-    */
 
     //反序列化自动执行
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
