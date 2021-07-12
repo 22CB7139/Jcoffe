@@ -5,29 +5,29 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <filter>
-    <filter-name>BehinderX</filter-name>
-    <filter-class>com.sorry.bug.BehinderFilterX</filter-class>
+    <filter-name>FilterXML</filter-name>
+    <filter-class>com.sorry.bug.CustomFilter</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>BehinderX</filter-name>
-    <url-pattern>/behinderx</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>FilterInject</filter-name>
-    <filter-class>com.sorry.bug.InjectFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>FilterInject</filter-name>
-    <url-pattern>/injectfilter</url-pattern>
+    <filter-name>FilterXML</filter-name>
+    <url-pattern>/customfilter</url-pattern>
   </filter-mapping>
   <servlet>
-    <servlet-name>ServletXml</servlet-name>
+    <servlet-name>ServletXML</servlet-name>
     <servlet-class>com.sorry.bug.CustomServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ServletXml</servlet-name>
+    <servlet-name>ServletXML</servlet-name>
     <url-pattern>/customservlet</url-pattern>
   </servlet-mapping>
+  <filter>
+    <filter-name>FilterInjectResin38</filter-name>
+    <filter-class>com.sorry.bug.resin.Resin38Filter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FilterInjectResin38</filter-name>
+    <url-pattern>/injectfilter</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>Unserialize</servlet-name>
     <servlet-class>com.sorry.bug.UnserializeServlet</servlet-class>
@@ -36,4 +36,13 @@
     <servlet-name>Unserialize</servlet-name>
     <url-pattern>/unserialize</url-pattern>
   </servlet-mapping>
+  <!-- tomcat -->
+  <filter>
+    <filter-name>filter_basic</filter-name>
+    <filter-class>com.sorry.bug.tomcat.Filter_basic</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>filter_basic</filter-name>
+    <url-pattern>/filter_basic</url-pattern>
+  </filter-mapping>
 </web-app>

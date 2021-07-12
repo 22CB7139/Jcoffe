@@ -1,4 +1,4 @@
-package com.sorry.bug;
+package com.sorry.bug.resin;
 
 import com.caucho.server.dispatch.FilterConfigImpl;
 import com.caucho.server.dispatch.FilterMapper;
@@ -17,7 +17,8 @@ import java.util.ArrayList;
 /**
  * created by 0x22cb7139 on 2021/6/24
  */
-public class InjectFilter implements Filter {
+//Resin
+public class Resin38Filter implements Filter {
 
 
     @Override

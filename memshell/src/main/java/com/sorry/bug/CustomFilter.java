@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 /**
  * created by 0x22cb7139 on 2021/6/16
  */
-public class BehinderFilterX implements Filter {
+public class CustomFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("Filter初始化创建");

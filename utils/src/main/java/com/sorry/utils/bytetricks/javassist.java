@@ -10,7 +10,6 @@ public class javassist {
 
     public static void main(String[] args) {
         try{
-
             //获取jvm加载的类库
             ClassPool pool = ClassPool.getDefault();
             //获取已知类

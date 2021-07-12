@@ -9,15 +9,17 @@
       </options>
     </properties>
     <root id="root">
-      <element id="module-output" name="memshell" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="memshell" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:8.5.34" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-annotations-api:8.5.34" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.1" />
         </element>
       </element>
+      <element id="module-output" name="memshell" />
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/memshell/target/memshell/META-INF/MANIFEST.MF" />
       </element>
