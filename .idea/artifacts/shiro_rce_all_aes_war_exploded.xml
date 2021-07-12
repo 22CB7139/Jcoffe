@@ -26,6 +26,7 @@
           <element id="archive" name="utils-1.0-SNAPSHOT.jar">
             <element id="module-output" name="utils" />
           </element>
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.20.0-GA" />
           <element id="library" level="project" name="Maven: com.nqzero:permit-reflect:0.4" />
         </element>
       </element>

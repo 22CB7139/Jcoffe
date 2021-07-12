@@ -5,12 +5,12 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <filter>
-    <filter-name>Behinder</filter-name>
-    <filter-class>com.sorry.bug.BehinderFilter</filter-class>
+    <filter-name>BehinderX</filter-name>
+    <filter-class>com.sorry.bug.BehinderFilterX</filter-class>
   </filter>
   <filter-mapping>
-    <filter-name>Behinder</filter-name>
-    <url-pattern>/behinder</url-pattern>
+    <filter-name>BehinderX</filter-name>
+    <url-pattern>/behinderx</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>FilterInject</filter-name>
@@ -27,5 +27,13 @@
   <servlet-mapping>
     <servlet-name>ServletXml</servlet-name>
     <url-pattern>/customservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Unserialize</servlet-name>
+    <servlet-class>com.sorry.bug.UnserializeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Unserialize</servlet-name>
+    <url-pattern>/unserialize</url-pattern>
   </servlet-mapping>
 </web-app>

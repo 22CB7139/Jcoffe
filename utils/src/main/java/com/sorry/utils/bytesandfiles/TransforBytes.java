@@ -1,7 +1,6 @@
 package com.sorry.utils.bytesandfiles;
 
 
-import com.sun.tools.javac.util.Convert;
 
 import java.io.*;
 import java.util.Base64;
