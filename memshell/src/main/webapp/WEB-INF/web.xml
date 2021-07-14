@@ -45,4 +45,12 @@
     <filter-name>filter_basic</filter-name>
     <url-pattern>/filter_basic</url-pattern>
   </filter-mapping>
+  <filter>
+    <filter-name>filter_noRequest</filter-name>
+    <filter-class>com.sorry.bug.tomcat.Filter_noRequest</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>filter_noRequest</filter-name>
+    <url-pattern>/filter_norequest</url-pattern>
+  </filter-mapping>
 </web-app>
