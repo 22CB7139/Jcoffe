@@ -44,6 +44,11 @@
             <version>0.4</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>8.5.34</version>
+        </dependency>
+        <dependency>
             <groupId>com.esafenet</groupId>
             <artifactId>utils</artifactId>
             <version>x</version>
@@ -78,6 +83,17 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/../lib/DBstep.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.1</version>
+        </dependency>
+
     </dependencies>
 
     <properties>

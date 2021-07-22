@@ -232,7 +232,7 @@ public class AES {
     * @Param: [bytes]
     * @return: java.lang.String
     */
-    private static String bytesToHex(byte[] bytes){
+    public static String bytesToHex(byte[] bytes){
         StringBuffer sb = new StringBuffer();
         if (bytes != null && bytes.length > 0)
         {
