@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 
 //泛微ecology8-resin3.1.8
-public class  P1K2 extends AbstractTranslet {
-    public P1K2() {
+public class Resin extends AbstractTranslet {
+    public Resin() {
     }
 
     public void transform(DOM document, SerializationHandler[] handlers) throws TransletException {

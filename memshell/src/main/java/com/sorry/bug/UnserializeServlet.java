@@ -15,7 +15,6 @@ import java.io.Writer;
 public class UnserializeServlet implements Servlet {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
-
     }
 
     @Override

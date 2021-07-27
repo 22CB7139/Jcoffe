@@ -23,7 +23,6 @@ public class CustomTemplatesImpl {
         //templates.newTransformer();
         PropertyUtils.getProperty(templates,"outputProperties");
 
-
         //byte[][] bytes = (byte[][])Reflections.invoke(templates,"getTransletBytecodes");
         //System.out.println(Base64.getEncoder().encodeToString(bytes[0]));
     }

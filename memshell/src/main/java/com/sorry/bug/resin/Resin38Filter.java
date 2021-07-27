@@ -23,8 +23,6 @@ public class Resin38Filter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("Filter初始化创建");
-
     }
 
     @Override

