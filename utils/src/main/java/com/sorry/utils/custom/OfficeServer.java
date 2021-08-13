@@ -1,7 +1,7 @@
 package com.sorry.utils.custom;
 
 import DBstep.iMsgServer2000;
-import com.sorry.utils.bytesandfiles.TransforBytes;
+import com.sorry.utils.bytecommon.TransforBytes;
 
 import java.io.IOException;
 

@@ -1,12 +1,12 @@
 package com.sorry.utils.bytetricks;
 
-import com.sorry.utils.bytesandfiles.TransforBytes;
+import com.sorry.utils.bytecommon.TransforBytes;
 import javassist.ClassPool;
 import javassist.CtClass;
 /**
  * created by 0x22cb7139 on 2021/7/12
  */
-public class Proxy {
+public class Javassist {
 
     public static byte[] ChangeClassName(String before,String after) {
         try{

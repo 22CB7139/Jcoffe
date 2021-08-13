@@ -1,7 +1,7 @@
 package com.sorry.utils.cipher;
 
 
-import com.sorry.utils.bytesandfiles.TransforBytes;
+import com.sorry.utils.bytecommon.TransforBytes;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.AesCipherService;
 import org.apache.shiro.util.ByteSource;

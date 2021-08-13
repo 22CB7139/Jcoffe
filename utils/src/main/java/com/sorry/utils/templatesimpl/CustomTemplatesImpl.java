@@ -1,13 +1,10 @@
 package com.sorry.utils.templatesimpl;
 
-import com.esafenet.ta.util.PropertyUtil;
-import com.sorry.utils.bytesandfiles.TransforBytes;
+import com.sorry.utils.bytecommon.TransforBytes;
 import com.sorry.utils.reflect.Reflections;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import org.apache.commons.beanutils.PropertyUtils;
-
-import java.util.Properties;
 
 
 /**

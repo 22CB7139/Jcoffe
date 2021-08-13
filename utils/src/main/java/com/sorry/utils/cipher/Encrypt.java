@@ -3,6 +3,8 @@ package com.sorry.utils.cipher;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import com.sorry.utils.bytecommon.TransforByte;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 /**
@@ -73,7 +75,7 @@ public class Encrypt {
 
     public static String encrypt3DES(String input, String key, Charset charset) {
         try {
-            return Byte.byte2hex(DES.encrypt(input.getBytes(charset.name()), key.getBytes()));
+            return TransforByte.byte2hex(DES.encrypt(input.getBytes(charset.name()), key.getBytes()));
         } catch (Exception arg3) {
             return "";
         }
@@ -85,7 +87,7 @@ public class Encrypt {
 
     public static String decrypt3DES(String input, String key, Charset charset) {
         try {
-            return new String(DES.decrypt(Byte.hex2byte(input.getBytes()), key.getBytes()), charset.name());
+            return new String(DES.decrypt(TransforByte.hex2byte(input.getBytes()), key.getBytes()), charset.name());
         } catch (Exception arg3) {
             return "";
         }
