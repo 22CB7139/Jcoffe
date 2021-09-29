@@ -34,6 +34,8 @@ public class Execute implements Serializable {
 
     public void setCommand(String command) throws IOException {
         this.command = command;
+        System.out.println("set方法");
+        System.out.println(Exploit(command));
     }
 
 

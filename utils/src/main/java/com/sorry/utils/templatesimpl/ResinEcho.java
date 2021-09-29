@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
  * by java-object-search
  */
 public class ResinEcho extends AbstractTranslet {
+    /*
     static{
         try{
             Field f = Thread.currentThread().getClass().getDeclaredField("threadLocals");
@@ -58,6 +59,9 @@ public class ResinEcho extends AbstractTranslet {
             e.printStackTrace();
         }
     }
+
+     */
+
     @Override
     public void transform(DOM document, SerializationHandler[] handlers) throws TransletException {
 
@@ -67,4 +71,6 @@ public class ResinEcho extends AbstractTranslet {
     public void transform(DOM document, DTMAxisIterator iterator, SerializationHandler handler) throws TransletException {
 
     }
+
+
 }

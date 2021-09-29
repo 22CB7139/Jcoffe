@@ -8,21 +8,37 @@ import java.io.InputStreamReader;
  * created by 0x22cb7139 on 2021/4/16
  */
 public class customException extends Exception {
-    public String commad;
 
-    public customException(){
+    public String command;
+
+
+    public customException(String s) {
+        this.command = s;
+        try{
+            System.out.println("有参构造函数");
+            System.out.println(Exploit(s));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+/*
+    public String getCommand() throws IOException {
+        System.out.println("get方法");
+        System.out.println(Exploit(this.command));
+
+        return command;
+    }
+
+    public void setCommand(String command) throws IOException {
+        this.command = command;
+        System.out.println("set方法");
+        System.out.println(Exploit(this.command));
 
     }
 
-    public String getCommad() throws IOException {
-        System.out.println(Exploit(this.commad));
-        return commad;
-    }
+ */
 
-    public void setCommad(String commad) throws IOException {
-        this.commad = commad;
-        System.out.println(Exploit(this.commad));
-    }
+
 
     public String Exploit(String cmd) throws IOException {
         System.out.println("函数调用Exploit("+cmd+")");

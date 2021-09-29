@@ -5,6 +5,7 @@ package com.sorry.bug;
  */
 public class Debug {
     public static void main(String[] args) {
-        Execute e = new Execute();
+
+
     }
 }

@@ -1,9 +1,9 @@
 package com.sorry.utils.custom;
 
-import com.caucho.server.dispatch.FilterConfigImpl;
-import com.caucho.server.dispatch.FilterMapper;
-import com.caucho.server.dispatch.FilterMapping;
-import com.caucho.server.webapp.WebApp;
+//import com.caucho.server.dispatch.FilterConfigImpl;
+//import com.caucho.server.dispatch.FilterMapper;
+//import com.caucho.server.dispatch.FilterMapping;
+//import com.caucho.server.webapp.WebApp;
 import com.sun.org.apache.xalan.internal.xsltc.DOM;
 import com.sun.org.apache.xalan.internal.xsltc.TransletException;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 //泛微ecology8-resin3.1.8
 public class Resin extends AbstractTranslet {
+
     public Resin() {
     }
 
@@ -28,6 +29,7 @@ public class Resin extends AbstractTranslet {
     public void transform(DOM document, DTMAxisIterator iterator, SerializationHandler handler) throws TransletException {
     }
 
+    /*
     static {
         try{
 
@@ -115,4 +117,6 @@ public class Resin extends AbstractTranslet {
             e.printStackTrace();
         }
     }
+
+     */
 }

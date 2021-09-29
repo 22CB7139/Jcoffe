@@ -39,7 +39,6 @@ public class CustomFilter implements Filter {
                 Object a = clazz.newInstance();
                 a.equals(pageContext);
                 return;
-
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.sorry.bug.controller;
 
+import org.apache.commons.beanutils.BeanComparator;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;

