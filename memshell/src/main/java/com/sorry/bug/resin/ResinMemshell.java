@@ -120,7 +120,6 @@ public class ResinMemshell implements Filter {
 
     }
 
-
     @Override
     public void destroy() {
         //

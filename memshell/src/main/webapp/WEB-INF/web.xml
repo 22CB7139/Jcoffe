@@ -4,7 +4,6 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  <!--
   <filter>
     <filter-name>FilterXML</filter-name>
     <filter-class>com.sorry.bug.CustomFilter</filter-class>
@@ -13,7 +12,23 @@
     <filter-name>FilterXML</filter-name>
     <url-pattern>/customfilter</url-pattern>
   </filter-mapping>
-  -->
+  <filter>
+    <filter-name>FilterXML</filter-name>
+    <filter-class>com.sorry.bug.CustomFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FilterXML</filter-name>
+    <url-pattern>/customfilter</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>Debug</filter-name>
+    <filter-class>com.sorry.bug.resin.Debug</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Debug</filter-name>
+    <url-pattern>/debug</url-pattern>
+  </filter-mapping>
+
   <servlet>
     <servlet-name>ServletXML</servlet-name>
     <servlet-class>com.sorry.bug.CustomServlet</servlet-class>
@@ -39,14 +54,6 @@
     <url-pattern>/unserialize</url-pattern>
   </servlet-mapping>
   <!-- tomcat -->
-  <filter>
-    <filter-name>filter_basic</filter-name>
-    <filter-class>com.sorry.bug.tomcat.BehinderFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>filter_basic</filter-name>
-    <url-pattern>/filter_basic</url-pattern>
-  </filter-mapping>
   <filter>
     <filter-name>filter_noRequest</filter-name>
     <filter-class>com.sorry.bug.tomcat.Filter_noRequest</filter-class>
