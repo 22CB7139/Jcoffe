@@ -15,6 +15,7 @@ import javax.servlet.Filter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Base64;
 
 
 //泛微ecology8-resin3.1.8

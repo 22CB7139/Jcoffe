@@ -1,6 +1,7 @@
 package com.sorry.utils.bytetricks;
 
 import com.sorry.utils.bytecommon.TransforBytes;
+import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
 /**
@@ -17,7 +18,7 @@ public class Javassist {
             //获取已知类
             CtClass clazz = pool.get(before);
             //clazz.makeClassInitializer().insertAfter(TransforBytes.readFile(""));
-            clazz.setName(after+ System.currentTimeMillis());
+            clazz.setName(after);
             final byte[] classBytes = clazz.toBytecode();
             return classBytes;
         }catch(Exception e){

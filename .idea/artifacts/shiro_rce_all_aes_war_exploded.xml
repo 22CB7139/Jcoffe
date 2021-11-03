@@ -6,6 +6,7 @@
         <exploded>true</exploded>
         <module>shiro-rce-all-aes</module>
         <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
     <root id="root">
@@ -22,13 +23,6 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
           <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.1" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.7.30" />
-          <element id="archive" name="utils-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="utils" />
-          </element>
-          <element id="library" level="project" name="Maven: org.javassist:javassist:3.23.1-GA" />
-          <element id="library" level="project" name="Maven: com.nqzero:permit-reflect:0.4" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:9.0.46" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-annotations-api:9.0.46" />
         </element>
       </element>
       <element id="directory" name="META-INF">

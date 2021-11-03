@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="resin3.1.8">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/resin3.1.8.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

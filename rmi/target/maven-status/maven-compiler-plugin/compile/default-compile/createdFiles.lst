@@ -1,0 +1,4 @@
+com/sorry/bug/rmi/RMIClient.class
+com/sorry/bug/rmi/Object.class
+com/sorry/bug/rmi/RMIServer.class
+com/sorry/bug/rmi/ObjectInterface.class

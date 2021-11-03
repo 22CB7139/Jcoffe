@@ -1,0 +1,5 @@
+com/sorry/bug/controller/LoginController.class
+com/sorry/bug/config/ShiroConfig.class
+com/sorry/bug/realm/MyRealm.class
+com/sorry/bug/ShiroApplication.class
+com/sorry/bug/controller/BypassController.class

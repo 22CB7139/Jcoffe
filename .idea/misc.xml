@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/memshell" />
-    <file type="web" url="file://$PROJECT_DIR$/shiro/rce(shiro-all-aes)" />
     <file type="web" url="file://$PROJECT_DIR$/shiro/shiro-rce-all-aes" />
-    <file type="web" url="file://$PROJECT_DIR$/../shiro/samples/web" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -14,7 +11,5 @@
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8u20" project-jdk-type="JavaSDK" />
 </project>
